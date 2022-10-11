@@ -1,0 +1,11 @@
+{
+    "name": "totoprayogo1916/ci-cart",
+    "autoload": {
+        "psr-4": {
+            "Totoprayogo\\cart\\": "src/"
+        }
+    },
+    "require": {
+        "codeigniter4/framework": "^4"
+    }
+}
