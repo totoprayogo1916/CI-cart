@@ -10,7 +10,6 @@ namespace Totoprayogo;
  * @category	Shopping Cart
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/libraries/cart.html
- * @deprecated	3.0.0	This class is too specific for CI.
  */
 class Cart {
 
