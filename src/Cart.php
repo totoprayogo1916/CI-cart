@@ -315,8 +315,10 @@ class Cart
 
     /**
      * Cart Total
+     *
+     * @return float
      */
-    public function total(): int
+    public function total()
     {
         return $this->_cart_contents['cart_total'];
     }
