@@ -58,22 +58,12 @@ class Cart {
 	 *
 	 * The constructor loads the Session class, used to store the shopping cart contents.
 	 *
-	 * @param	array
 	 * @return	void
 	 */
-	public function __construct($params = array())
+	public function __construct()
 	{
-		// Set the super object to a local variable for use later
-		$this->CI =& get_instance();
-
-		// Are any config settings being passed manually?  If so, set them
-		$config = is_array($params) ? $params : array();
-
-		// Load the Sessions class
-		$this->CI->load->driver('session', $config);
-
 		// Grab the shopping cart array from the session table
-		$this->_cart_contents = $this->CI->session->userdata('cart_contents');
+		$this->_cart_contents = session('cart_contents');
 		if ($this->_cart_contents === NULL)
 		{
 			// No cart exists so we'll set some base values
@@ -189,7 +179,7 @@ class Cart {
 
 		// Validate the product name. It can only be alpha-numeric, dashes, underscores, colons or periods.
 		// Note: These can be user-specified by setting the $this->product_name_rules variable.
-		if ($this->product_name_safe && ! preg_match('/^['.$this->product_name_rules.']+$/i'.(UTF8_ENABLED ? 'u' : ''), $items['name']))
+		if ($this->product_name_safe && ! preg_match('/^['.$this->product_name_rules.']+$/iu', $items['name']))
 		{
 			log_message('error', 'An invalid name was submitted as the product name: '.$items['name'].' The name can only contain alpha-numeric characters, dashes, underscores, colons, and spaces');
 			return FALSE;
