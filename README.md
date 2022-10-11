@@ -29,10 +29,10 @@ Feel free to read the original: https://codeigniter.com/userguide3/libraries/car
     'options' => ['Size' => 'L', 'Color' => 'Red']
 ]);
 
-// Get the total items. Formerly known as total_items()
-$cart->totalItems();
+// Get the total items.
+$cart->total_items();
 
-// Remove an item using its `rowid`
+// Remove an item using its `rowId`
 $cart->remove('4166b0e7fc8446e81e16883e9a812db8');
    
 // Clear the shopping cart
