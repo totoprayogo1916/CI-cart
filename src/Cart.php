@@ -401,12 +401,9 @@ class Cart
      *
      * Returns the supplied number with commas and a decimal point.
      *
-     * @param	float
-     * @param mixed $n
-     *
-     * @return string
+     * @param float|string $n
      */
-    public function format_number($n = '')
+    public function format_number($n = ''): string
     {
         return ($n === '') ? '' : number_format((float) $n, 2, '.', ',');
     }
