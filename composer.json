@@ -1,5 +1,7 @@
 {
     "name": "totoprayogo1916/codeigniter4-cart",
+    "description": "CodeIgniter 4 Cart Library (Originally from CodeIgniter 3)",
+    "keywords": ["codeigniter4", "shopping cart", "cart"],
     "license": "MIT",
     "autoload": {
         "psr-4": {
