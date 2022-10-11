@@ -1,5 +1,6 @@
 {
     "name": "totoprayogo1916/codeigniter4-cart",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Totoprayogo\\Lib\\": "src/"
