@@ -35,13 +35,6 @@ class Cart
     public $product_name_safe = true;
 
     /**
-     * Reference to CodeIgniter instance
-     *
-     * @var object
-     */
-    protected $CI;
-
-    /**
      * Contents of the cart
      *
      * @var array
@@ -316,7 +309,7 @@ class Cart
 
         // Is our cart empty? If so we delete it from the session
         if (count($this->_cart_contents) <= 2) {
-            $this->CI->session->unset_userdata('cart_contents');
+            session()->remove('cart_contents');
 
             // Nothing more to do... coffee time!
             return false;
@@ -324,7 +317,7 @@ class Cart
 
         // If we made it this far it means that our cart has data.
         // Let's pass it to the Session class so it can be stored
-        $this->CI->session->set_userdata(['cart_contents' => $this->_cart_contents]);
+        session()->set(['cart_contents' => $this->_cart_contents]);
 
         // Woot!
         return true;
@@ -462,6 +455,6 @@ class Cart
     public function destroy()
     {
         $this->_cart_contents = ['cart_total' => 0, 'total_items' => 0];
-        $this->CI->session->unset_userdata('cart_contents');
+        session()->remove('cart_contents');
     }
 }
