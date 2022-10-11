@@ -1,6 +1,6 @@
 <?php
 
-namespace Totoprayogo;
+namespace Totoprayogo\Lib;
 
 /**
  * Shopping Cart Class

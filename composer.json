@@ -2,7 +2,7 @@
     "name": "totoprayogo1916/ci-cart",
     "autoload": {
         "psr-4": {
-            "Totoprayogo\\cart\\": "src/"
+            "Totoprayogo\\Lib\\": "src/"
         }
     },
     "require": {
