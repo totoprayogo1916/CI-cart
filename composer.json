@@ -1,5 +1,5 @@
 {
-    "name": "totoprayogo1916/ci-cart",
+    "name": "totoprayogo1916/codeigniter4-cart",
     "autoload": {
         "psr-4": {
             "Totoprayogo\\Lib\\": "src/"
