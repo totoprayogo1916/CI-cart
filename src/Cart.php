@@ -34,8 +34,6 @@ class Cart
      */
     public $product_name_safe = true;
 
-    // --------------------------------------------------------------------------
-
     /**
      * Reference to CodeIgniter instance
      *
@@ -68,8 +66,6 @@ class Cart
 
         log_message('info', 'Cart Class Initialized');
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Insert items into the cart and save it to the session table
@@ -118,8 +114,6 @@ class Cart
         return false;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Insert
      *
@@ -137,16 +131,12 @@ class Cart
             return false;
         }
 
-        // --------------------------------------------------------------------
-
         // Does the $items array contain an id, quantity, price, and name?  These are required
         if (! isset($items['id'], $items['qty'], $items['price'], $items['name'])) {
             log_message('error', 'The cart array must contain a product ID, quantity, price, and name.');
 
             return false;
         }
-
-        // --------------------------------------------------------------------
 
         // Prep the quantity. It can only be a number.  Duh... also trim any leading zeros
         $items['qty'] = (float) $items['qty'];
@@ -155,8 +145,6 @@ class Cart
         if ($items['qty'] === 0) {
             return false;
         }
-
-        // --------------------------------------------------------------------
 
         // Validate the product ID. It can only be alpha-numeric, dashes, underscores or periods
         // Not totally sure we should impose this rule, but it seems prudent to standardize IDs.
@@ -167,8 +155,6 @@ class Cart
             return false;
         }
 
-        // --------------------------------------------------------------------
-
         // Validate the product name. It can only be alpha-numeric, dashes, underscores, colons or periods.
         // Note: These can be user-specified by setting the $this->product_name_rules variable.
         if ($this->product_name_safe && ! preg_match('/^[' . $this->product_name_rules . ']+$/iu', $items['name'])) {
@@ -176,8 +162,6 @@ class Cart
 
             return false;
         }
-
-        // --------------------------------------------------------------------
 
         // Prep the price. Remove leading zeros and anything that isn't a number or decimal point.
         $items['price'] = (float) $items['price'];
@@ -201,8 +185,6 @@ class Cart
             $rowid = md5($items['id']);
         }
 
-        // --------------------------------------------------------------------
-
         // Now that we have our unique "row ID", we'll add our cart items to the master array
         // grab quantity if it's already there and add it on
         $old_quantity = isset($this->_cart_contents[$rowid]['qty']) ? (int) $this->_cart_contents[$rowid]['qty'] : 0;
@@ -214,8 +196,6 @@ class Cart
 
         return $rowid;
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Update the cart
@@ -266,8 +246,6 @@ class Cart
         return false;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Update the cart
      *
@@ -315,8 +293,6 @@ class Cart
         return true;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Save the cart array to the session DB
      *
@@ -354,8 +330,6 @@ class Cart
         return true;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Cart Total
      *
@@ -365,8 +339,6 @@ class Cart
     {
         return $this->_cart_contents['cart_total'];
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Remove Item
@@ -387,8 +359,6 @@ class Cart
         return true;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Total Items
      *
@@ -400,8 +370,6 @@ class Cart
     {
         return $this->_cart_contents['total_items'];
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Cart Contents
@@ -424,8 +392,6 @@ class Cart
         return $cart;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Get cart item
      *
@@ -442,8 +408,6 @@ class Cart
             : $this->_cart_contents[$row_id];
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Has options
      *
@@ -459,8 +423,6 @@ class Cart
         return isset($this->_cart_contents[$row_id]['options']) && count($this->_cart_contents[$row_id]['options']) !== 0;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Product options
      *
@@ -474,8 +436,6 @@ class Cart
     {
         return $this->_cart_contents[$row_id]['options'] ?? [];
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Format Number
@@ -491,8 +451,6 @@ class Cart
     {
         return ($n === '') ? '' : number_format((float) $n, 2, '.', ',');
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Destroy the cart
