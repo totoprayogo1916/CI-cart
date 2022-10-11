@@ -63,12 +63,11 @@ class Cart
     /**
      * Insert items into the cart and save it to the session table
      *
-     * @param	array
-     * @param mixed $items
+     * @param array $items array of items to insert into the cart
      *
-     * @return bool
+     * @return bool True if successful, false otherwise
      */
-    public function insert($items = [])
+    public function insert(array $items = []): bool
     {
         // Was any cart data passed? No? Bah...
         if (! is_array($items) || count($items) === 0) {
@@ -84,7 +83,7 @@ class Cart
 
         $save_cart = false;
         if (isset($items['id'])) {
-            if (($rowid = $this->_insert($items))) {
+            if (($rowId = $this->_insert($items))) {
                 $save_cart = true;
             }
         } else {
@@ -101,7 +100,7 @@ class Cart
         if ($save_cart === true) {
             $this->_save_cart();
 
-            return $rowid ?? true;
+            return $rowId ?? true;
         }
 
         return false;
@@ -110,12 +109,11 @@ class Cart
     /**
      * Insert
      *
-     * @param	array
-     * @param mixed $items
+     * @param array $items array of items to inserted
      *
-     * @return bool
+     * @return bool|string|null
      */
-    protected function _insert($items = [])
+    protected function _insert(array $items = [])
     {
         // Was any cart data passed? No? Bah...
         if (! is_array($items) || count($items) === 0) {
@@ -170,24 +168,24 @@ class Cart
         // Our solution is to convert the options array to a string and MD5 it along with the product ID.
         // This becomes the unique "row ID"
         if (isset($items['options']) && count($items['options']) > 0) {
-            $rowid = md5($items['id'] . serialize($items['options']));
+            $rowId = md5($items['id'] . serialize($items['options']));
         } else {
             // No options were submitted so we simply MD5 the product ID.
             // Technically, we don't need to MD5 the ID in this case, but it makes
             // sense to standardize the format of array indexes for both conditions
-            $rowid = md5($items['id']);
+            $rowId = md5($items['id']);
         }
 
         // Now that we have our unique "row ID", we'll add our cart items to the master array
         // grab quantity if it's already there and add it on
-        $old_quantity = isset($this->_cart_contents[$rowid]['qty']) ? (int) $this->_cart_contents[$rowid]['qty'] : 0;
+        $old_quantity = isset($this->_cart_contents[$rowId]['qty']) ? (int) $this->_cart_contents[$rowId]['qty'] : 0;
 
         // Re-create the entry, just to make sure our index contains only the data from this submission
-        $items['rowid'] = $rowid;
+        $items['rowid'] = $rowId;
         $items['qty'] += $old_quantity;
-        $this->_cart_contents[$rowid] = $items;
+        $this->_cart_contents[$rowId] = $items;
 
-        return $rowid;
+        return $rowId;
     }
 
     /**
@@ -198,12 +196,11 @@ class Cart
      * changes to the quantity before checkout. That array must contain the
      * product ID and quantity for each item.
      *
-     * @param	array
-     * @param mixed $items
+     * @param array $items array of items to be updated
      *
-     * @return bool
+     * @return bool True if the update was successful, false otherwise
      */
-    public function update($items = [])
+    public function update(array $items = []): bool
     {
         // Was any cart data passed?
         if (! is_array($items) || count($items) === 0) {
@@ -246,13 +243,8 @@ class Cart
      * Typically it is called from the "view cart" page if a user makes
      * changes to the quantity before checkout. That array must contain the
      * rowid and quantity for each item.
-     *
-     * @param	array
-     * @param mixed $items
-     *
-     * @return bool
      */
-    protected function _update($items = [])
+    protected function _update(array $items = []): bool
     {
         // Without these array indexes there is nothing we can do
         if (! isset($items['rowid'], $this->_cart_contents[$items['rowid']])) {
@@ -288,10 +280,8 @@ class Cart
 
     /**
      * Save the cart array to the session DB
-     *
-     * @return bool
      */
-    protected function _save_cart()
+    protected function _save_cart(): bool
     {
         // Let's add up the individual prices and set the cart sub-total
         $this->_cart_contents['total_items'] = $this->_cart_contents['cart_total'] = 0;
@@ -325,10 +315,8 @@ class Cart
 
     /**
      * Cart Total
-     *
-     * @return int
      */
-    public function total()
+    public function total(): int
     {
         return $this->_cart_contents['cart_total'];
     }
@@ -337,16 +325,11 @@ class Cart
      * Remove Item
      *
      * Removes an item from the cart
-     *
-     * @param	int
-     * @param mixed $rowid
-     *
-     * @return bool
      */
-    public function remove($rowid)
+    public function remove(string $rowId): bool
     {
         // unset & save
-        unset($this->_cart_contents[$rowid]);
+        unset($this->_cart_contents[$rowId]);
         $this->_save_cart();
 
         return true;
@@ -356,10 +339,8 @@ class Cart
      * Total Items
      *
      * Returns the total item count
-     *
-     * @return int
      */
-    public function total_items()
+    public function total_items(): int
     {
         return $this->_cart_contents['total_items'];
     }
@@ -369,12 +350,9 @@ class Cart
      *
      * Returns the entire cart array
      *
-     * @param	bool
-     * @param mixed $newest_first
-     *
-     * @return array
+     * @param bool $newest_first Sort items. True if newest first, false otherwise. Default is false.
      */
-    public function contents($newest_first = false)
+    public function contents(bool $newest_first = false): array
     {
         // do we want the newest first?
         $cart = ($newest_first) ? array_reverse($this->_cart_contents) : $this->_cart_contents;
@@ -389,16 +367,12 @@ class Cart
      * Get cart item
      *
      * Returns the details of a specific item in the cart
-     *
-     * @param string $row_id
-     *
-     * @return array
      */
-    public function get_item($row_id)
+    public function get_item(string $rowId): array
     {
-        return (in_array($row_id, ['total_items', 'cart_total'], true) || ! isset($this->_cart_contents[$row_id]))
+        return (in_array($rowId, ['total_items', 'cart_total'], true) || ! isset($this->_cart_contents[$rowId]))
             ? false
-            : $this->_cart_contents[$row_id];
+            : $this->_cart_contents[$rowId];
     }
 
     /**
@@ -406,28 +380,20 @@ class Cart
      *
      * Returns TRUE if the rowid passed to this function correlates to an item
      * that has options associated with it.
-     *
-     * @param string $row_id = ''
-     *
-     * @return bool
      */
-    public function has_options($row_id = '')
+    public function has_options(string $rowId = ''): bool
     {
-        return isset($this->_cart_contents[$row_id]['options']) && count($this->_cart_contents[$row_id]['options']) !== 0;
+        return isset($this->_cart_contents[$rowId]['options']) && count($this->_cart_contents[$rowId]['options']) !== 0;
     }
 
     /**
      * Product options
      *
      * Returns the an array of options, for a particular product row ID
-     *
-     * @param string $row_id = ''
-     *
-     * @return array
      */
-    public function product_options($row_id = '')
+    public function product_options(string $rowId = ''): array
     {
-        return $this->_cart_contents[$row_id]['options'] ?? [];
+        return $this->_cart_contents[$rowId]['options'] ?? [];
     }
 
     /**
