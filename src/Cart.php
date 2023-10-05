@@ -1,6 +1,6 @@
 <?php
 
-namespace Totoprayogo\Lib;
+namespace Totoprayogo1916\Libraries\CodeIgniter;
 
 /**
  * Shopping Cart Class
