@@ -6,7 +6,7 @@ The Cart Library originally from CodeIgniter 3.
 Feel free to read the original: https://codeigniter.com/userguide3/libraries/cart.html 
 
  ```php
- use Totoprayogo\Lib\Cart;
+ use Totoprayogo1916\Libraries\CodeIgniter\Cart;
 
  $cart = new Cart();
  
