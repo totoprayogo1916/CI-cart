@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Totoprayogo1916\\Libraries\\CodeIgniter": "src/"
+            "Totoprayogo1916\\Libraries\\CodeIgniter\\": "src/"
         }
     },
     "require": {
