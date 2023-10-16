@@ -30,6 +30,6 @@ class ConfigPublisher extends Publisher
     {
         return $this
             ->addPath('Cart.php')
-            ->copy();
+            ->copy(false);
     }
 }
