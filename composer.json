@@ -1,14 +1,32 @@
 {
     "name": "totoprayogo1916/codeigniter4-cart",
     "description": "CodeIgniter 4 Cart Library (Originally from CodeIgniter 3)",
-    "keywords": ["codeigniter4", "shopping cart", "cart"],
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Totoprayogo1916\\Libraries\\CodeIgniter\\": "src/"
-        }
-    },
+    "keywords": [
+        "codeigniter4",
+        "shopping cart",
+        "cart"
+    ],
     "require": {
         "codeigniter4/framework": "^4"
+    },
+    "require-dev": {
+        "codeigniter4/devkit": "^1.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Totoprayogo1916\\CodeIgniter\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": false
+        }
+    },
+    "scripts": {
+        "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix --ansi --verbose --diff"
     }
 }
