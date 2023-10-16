@@ -16,9 +16,7 @@ class ConfigPublisher extends Publisher
     protected $source = VENDORPATH . 'totoprayogo1916/codeigniter4-cart/src/Config/';
 
     /**
-     * FCPATH is always the default destination,
-     * but we may want them to go in a sub-folder
-     * to keep things organized.
+     * Target to save
      *
      * @var string
      */
