@@ -233,7 +233,9 @@ class Cart
             $items['qty'] = (float) $items['qty'];
             // Is the quantity zero?  If so we will remove the item from the cart.
             // If the quantity is greater than zero we are updating
-            if ($items['qty'] === 0) {
+            $epsilon = 0.000001; // Define a small value for comparison
+
+            if (abs($items['qty']) < $epsilon) {
                 unset($this->_cart_contents[$items['rowid']]);
 
                 return true;
