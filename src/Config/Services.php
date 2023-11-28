@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeIgniter\Settings\Config;
+namespace Totoprayogo1916\CodeIgniter\Config;
 
 use CodeIgniter\Config\BaseService;
 use Totoprayogo1916\CodeIgniter\Libraries\Cart;
