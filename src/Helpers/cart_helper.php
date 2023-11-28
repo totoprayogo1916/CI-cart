@@ -4,7 +4,7 @@ if (! function_exists('cart')) {
     /**
      * Provides a convenience interface to the Cart service.
      *
-     * @return void|object|array
+     * @return array|object|void
      */
     function cart()
     {
