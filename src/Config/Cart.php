@@ -12,7 +12,7 @@ class Cart extends BaseConfig
      *
      * @var string
      */
-    public $product_id_rules = '\.a-z0-9_-';
+    public string $product_id_rules = '\.a-z0-9_-';
 
     /**
      * These are the regular expression rules that we use to validate the product ID and product name
@@ -20,12 +20,12 @@ class Cart extends BaseConfig
      *
      * @var string
      */
-    public $product_name_rules = '\w \-\.\:';
+    public string $product_name_rules = '\w \-\.\:';
 
     /**
      * only allow safe product names
      *
      * @var bool
      */
-    public $product_name_safe = true;
+    public bool $product_name_safe = true;
 }
